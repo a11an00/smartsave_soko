@@ -25,7 +25,7 @@ async def scrape_cleanshelf():
         
         for subcat in CLEANSHELF_SUBCATEGORIES:
             url = f"https://cleanshelf.co.ke/{subcat}"
-            print(f"\n🚀 [Processing Subcategory] Cleanshelf -> {subcat.upper()}")
+            print(f"\n [Processing Subcategory] Cleanshelf -> {subcat.upper()}")
             print(f"[Cleanshelf] Requesting: {url}")
             
             try:
