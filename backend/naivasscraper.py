@@ -8,7 +8,7 @@ supermarket_id = 1
 
 NAIVAS_SUBCATEGORIES = [
     "spirits",
-    "beers",
+    "beer",
     "fats-oils",
     "snacks",
     "breakfast",
