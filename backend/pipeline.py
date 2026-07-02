@@ -4,10 +4,10 @@ from rapidfuzz import process, fuzz
 import cleaner
 
 def ingest_scraped_product(db: Session, supermarket_id: int, raw_title: str, scrape_price: float):
-    # 1. Parse size data and extract a normalized name baseline
+    # Parse the raw title to extract size and unit information
     size_val, size_unit, clean_title = cleaner.parse_volume_and_unit(raw_title)
     
-    # 2. Check if a matching product sizing profile already exists
+    #  Checks if a matching product sizing profile already exists
     existing_products = db.execute(
         text("SELECT product_id, unified_name FROM products WHERE size_value = :val AND size_unit = :unit"),
         {"val": size_val, "unit": size_unit}
@@ -23,7 +23,7 @@ def ingest_scraped_product(db: Session, supermarket_id: int, raw_title: str, scr
             matched_product_id = product_pool[best_match[0]]
             print(f"-> Fuzzy Match Linked: '{raw_title}' to existing Product ID: {matched_product_id}")
 
-    # 3. If it's a completely new addition, append it to the global directory
+    # If it's a completely new addition, append it to the database and retrieve the newly generated product_id
     if not matched_product_id:
         insert_prod = db.execute(
             text("INSERT INTO products (unified_name, size_value, size_unit) VALUES (:name, :val, :unit)"),
@@ -33,7 +33,7 @@ def ingest_scraped_product(db: Session, supermarket_id: int, raw_title: str, scr
         matched_product_id = insert_prod.lastrowid
         print(f"-> Created Catalog Row: {clean_title} ({size_val}{size_unit})")
 
-    # 4. FAN-OUT LOGIC: Grab ALL branches belonging to this supermarket chain
+    #Grab ALL branches belonging to this supermarket chain and broadcast the price to each of them, ensuring uniformity across the chain
     branches = db.execute(
         text("SELECT branch_id FROM branches WHERE supermarket_id = :s_id"),
         {"s_id": supermarket_id}

@@ -4,21 +4,21 @@ from playwright.async_api import async_playwright
 from database import SessionLocal
 from pipeline import ingest_scraped_product
 
-supermarket_id = 2  
-
+supermarket_id = 2  # Quickmart's unique identifier in the database
+#list of subcategories to scrape from Quickmart, can be expanded or modified as needed
 QUICKMART_SUBCATEGORIES = [
     "liquor",
-    "juices-carbonates",
-    "cooking- oils-fats",
-    "sugar",
-    "rice-cereals",
-    "dairy-products",
-    "cakes-bread",
-    "tv",
+    #"juices-carbonates",
+    #"cooking- oils-fats",
+    #"sugar",
+    #"rice-cereals",
+    #"dairy-products",
+    #"cakes-bread",
+    #"tv",
 ]
 
 MAX_PAGES_PER_CATEGORY = 3  # Safeguard boundary limit
-
+#handle all popups that may appear on the page, such as age gates, location screens, and initial cookie overlays
 async def handle_quickmart_popups(page, max_wait_time_ms=5000):
     """Destroys age gates, location screens, and initial cookie overlays."""
     try:
@@ -57,7 +57,7 @@ async def scrape_quickmart():
     async with async_playwright() as p:
         print("[Scraper] Launching browser engine for Quickmart...")
         browser = await p.chromium.launch(headless=False)
-        
+        #open chrome browser with a custom user agent and viewport size to mimic a real user
         context = await browser.new_context(
             user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
             viewport={"width": 1280, "height": 900},
@@ -66,14 +66,14 @@ async def scrape_quickmart():
         )
         page = await context.new_page()
         
-        # Core entry and background initialization
+        # open website and pass to popup handler
         print("\n[Quickmart] Performing baseline setup...")
         try:
             await page.goto("https://www.quickmart.co.ke/", timeout=60000, wait_until="domcontentloaded")
             await handle_quickmart_popups(page, max_wait_time_ms=6000)
         except Exception as home_err:
             print(f"[Quickmart Warning] Base initialization bypassed: {home_err}")
-
+        #loop through each subcategory and scrape product data
         for subcat in QUICKMART_SUBCATEGORIES:
             url = f"https://www.quickmart.co.ke/{subcat}"
             print(f"\n [Processing Subcategory] Quickmart -> {subcat.upper()}")
@@ -92,7 +92,8 @@ async def scrape_quickmart():
                         await page.evaluate(f"window.scrollTo(0, document.body.scrollHeight * {scroll + 1} / 4);")
                         await page.wait_for_timeout(1000)
                     
-                    # --- GRID HARVESTER ENGINE ---
+                    # view whole page content and wait for any dynamic content to load
+                    #find product cards by common class patterns and filter for price text and title text
                     extracted_items = await page.evaluate("""
                         () => {
                             const items = [];
@@ -150,9 +151,9 @@ async def scrape_quickmart():
                     finally:
                         db.close()
 
-            # --- PAGINATION NAVIGATION SHIELD ---
-                    # Inspecting image_878336.png reveals custom components instead of plain text tags.
-                    # We will target the buttons using a CSS layout path.
+                    # --- PAGINATION NAVIGATION SHIELD ---
+                    #navigate from the current page to the next page if available, else break the loop
+                    # We attempt to locate the next button by its structural position in the pagination block.
                     pagination_buttons = page.locator("div.pagination button, .pagination button, [class*='pagination'] button, [class*='page'] a")
                     button_count = await pagination_buttons.count()
                     

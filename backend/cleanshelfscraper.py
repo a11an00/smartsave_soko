@@ -4,10 +4,10 @@ from playwright.async_api import async_playwright
 from database import SessionLocal
 from pipeline import ingest_scraped_product
 
-# Aligned to your database relation index for Cleanshelf
-supermarket_id = 3  
 
-# Verified e-commerce inventory subcategory list for Cleanshelf
+supermarket_id = 3  #database identifier for Cleanshelf supermarket
+
+#  inventory subcategory list for Cleanshelf can be expanded or modified as needed
 CLEANSHELF_SUBCATEGORIES = [
     "dairy-products",
     "butter-2",
@@ -26,8 +26,8 @@ CLEANSHELF_SUBCATEGORIES = [
 
 ]
 
-TOTAL_PAGES_TO_SCRAPE = 3
-
+TOTAL_PAGES_TO_SCRAPE = 3 #stores the maximum number of pages to scrape per subcategory, can be adjusted as needed
+#handles popups that may appear on the Cleanshelf website, such as location prompts, modals, and overlays
 async def handle_cleanshelf_popups(page, max_wait_time_ms=5000):
     """
     Actively tracks down and neutralizes region selection prompts, location blockers, 
@@ -70,7 +70,8 @@ async def handle_cleanshelf_popups(page, max_wait_time_ms=5000):
                 
     except Exception as e:
         print(f"   [Cleanshelf Warning] Layout overlay monitor caught an exception: {e}")
-
+#scrapes product data from Cleanshelf website, iterating through subcategories and pages, extracting product titles and prices, and storing them in the database
+#launches a browser instance, navigates to the Cleanshelf shop page, handles popups, and performs scrolling to ensure all dynamic content is loaded before extraction
 async def scrape_cleanshelf():
     async with async_playwright() as p:
         print("[Scraper] Launching browser engine for Cleanshelf...")
@@ -91,11 +92,11 @@ async def scrape_cleanshelf():
             await handle_cleanshelf_popups(page, max_wait_time_ms=6000)
         except Exception as e:
             print(f"[Cleanshelf Warning] Base shop route setup bypassed: {e}")
-        
+        #scrapes each subcategory and page, extracting product titles and prices, and storing them in the database
         for subcat in CLEANSHELF_SUBCATEGORIES:
             for page_num in range(1, TOTAL_PAGES_TO_SCRAPE + 1):
                 
-                # Dynamic parameter syntax generation
+                
                 if page_num == 1:
                     url = f"https://cleanshelf.online/shop?category_slug={subcat}"
                 else:
@@ -108,7 +109,7 @@ async def scrape_cleanshelf():
                     await page.goto(url, timeout=60000, wait_until="domcontentloaded")
                     await handle_cleanshelf_popups(page, max_wait_time_ms=5000)
                     
-                    # Layout hydration scrolling script
+                    # Perform a series of scrolls to ensure all dynamic content is loaded, with a brief pause after each scroll to allow for any lazy-loaded elements to render
                     for i in range(4):
                         await page.evaluate(f"window.scrollTo(0, (document.body.scrollHeight / 4) * {i + 1});")
                         await page.wait_for_timeout(1000)
@@ -116,7 +117,7 @@ async def scrape_cleanshelf():
                     # Secondary scroll safety sweep
                     await handle_cleanshelf_popups(page, max_wait_time_ms=2000)
                     
-                    # --- REFINED DYNAMIC HARVESTER ENGINE ---
+                    #finds the card where product price is displayed and then traverses up the DOM tree to locate the nearest title element, ensuring that the title is not a generic category label or navigation text
                     extracted_items = await page.evaluate(f"""
                         () => {{
                             const data = [];
@@ -186,7 +187,7 @@ async def scrape_cleanshelf():
                     """)
                     
                     print(f"[Cleanshelf] Page {page_num} successfully isolated {len(extracted_items)} clean unique items.")
-                    
+                    #stores the extracted product titles and prices in the database, ensuring that only valid entries are saved
                     db = SessionLocal()
                     try:
                         for item in extracted_items:
@@ -217,8 +218,8 @@ async def scrape_cleanshelf():
                 except Exception as e:
                     print(f"[Cleanshelf Error] Loop processing issue: {e}")
                     
-        await browser.close()
+        await browser.close()#closes the browser instance after scraping is complete
         print("\n[Cleanshelf] Engine execution finalized cleanly.")
 
-if __name__ == "__main__":
+if __name__ == "__main__":#enables the script to be run directly, initiating the scraping process for Cleanshelf supermarket
     asyncio.run(scrape_cleanshelf())
