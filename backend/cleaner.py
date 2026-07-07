@@ -1,5 +1,5 @@
 import re
-from typing import Tuple, Optional
+from typing import Tuple
 
 def parse_volume_and_unit(title: str) -> Tuple[float, str, str]:
     """
@@ -9,7 +9,8 @@ def parse_volume_and_unit(title: str) -> Tuple[float, str, str]:
     # Lowercase for consistent processing
     title_clean = title.lower().strip()
     
-    # RegEx pattern to look for patterns like: 1kg, 500g, 2 l, 400ml, 1.5lt
+    # Improved RegEx pattern to look for patterns like: 1kg, 500g, 2 l, 400ml, 1.5lt
+    # Case insensitive flag (?i) added directly into compilation if needed, or handled via string manipulation
     pattern = r'(\d+(?:\.\d+)?)\s*(kg|g|l|ml|lt|ltr|litres|grams|kilograms)\b'
     match = re.search(pattern, title_clean)
     
@@ -23,9 +24,14 @@ def parse_volume_and_unit(title: str) -> Tuple[float, str, str]:
         elif unit in ['l', 'lt', 'ltr', 'litres']: unit = 'l'
         elif unit in ['ml']: unit = 'ml'
         
-        # Remove the size substring from the title to leave a clean name
-        clean_name = re.sub(pattern, '', title).strip().replace(" - ", " ").strip()
+        # FIX: Use re.IGNORECASE flag so "500Ml", "500ML", and "500ml" are all cleanly stripped
+        clean_name = re.sub(pattern, '', title, flags=re.IGNORECASE)
+        
+        # Additional cleanup to strip trailing/leading punctuation, spaces, and weird dashes left behind
+        clean_name = clean_name.replace(" - ", " ").replace(" , ", " ")
+        clean_name = re.sub(r'\s+', ' ', clean_name).strip() # Squash multiple spaces
+        
         return value, unit, clean_name
         
     # Default fallback if no clear weight unit is discovered
-    return 1.0, "pcs", title
+    return 1.0, "pcs", title.strip()

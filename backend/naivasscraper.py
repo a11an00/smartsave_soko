@@ -22,7 +22,7 @@ NAIVAS_SUBCATEGORIES = [
     "commodities/flour",
     "commodities/rice-cereals",
     "commodities/sugar-sweeteners",
-    "food-cupboard/crisps",
+    
 
 ]
 

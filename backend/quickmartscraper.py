@@ -7,14 +7,16 @@ from pipeline import ingest_scraped_product
 supermarket_id = 2  # Quickmart's unique identifier in the database
 #list of subcategories to scrape from Quickmart, can be expanded or modified as needed
 QUICKMART_SUBCATEGORIES = [
-    "liquor",
-    #"juices-carbonates",
-    #"cooking- oils-fats",
-    #"sugar",
-    #"rice-cereals",
-    #"dairy-products",
-    #"cakes-bread",
-    #"tv",
+    "spirits",
+    "beer",
+    "wines",
+    "juices-carbonates",
+    "cooking- oils-fats",
+    "sugar",
+    "rice-cereals",
+    "dairy-products",
+    "cakes-bread",
+    "tv",
 ]
 
 MAX_PAGES_PER_CATEGORY = 3  # Safeguard boundary limit
