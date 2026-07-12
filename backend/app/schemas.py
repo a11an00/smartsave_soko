@@ -11,9 +11,16 @@ class TokenSchema(BaseModel):
     token_type: str
 
 class CartItemRequest(BaseModel):
-    normalized_item_id: int
-    quantity: int = Field(default=1, ge=1)
+    product_id: int
+    quantity: int = Field(default=1, ge=1, description="Quantity must be 1 or greater.")
 
 class OptimizeRequest(BaseModel):
     items: List[CartItemRequest]
-    split_threshold_kes: float = Field(default=150.0, ge=0.0, description="Minimum cost savings margin required to prompt a multi-store split split.")
+    split_threshold_kes: float = Field(
+        default=150.0, 
+        ge=0.0, 
+        description="Minimum cost savings margin required to prompt a multi-store split order."
+    )
+
+class BatchSearchRequest(BaseModel):
+    product_ids: List[int] = Field(..., min_items=1, description="List of product IDs to retrieve details for.")

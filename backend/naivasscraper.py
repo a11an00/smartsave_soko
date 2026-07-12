@@ -36,7 +36,7 @@ async def handle_naivas_popups(page, max_wait_time_ms=5000):
     try:
         start_time = asyncio.get_event_loop().time()
         blockers = [
-            # 1. Age Verification Targets 
+            # 1. Age Verification Targets s
             "button:has-text(\"Yes, I'm 18!\")",
             "button:has-text('Yes')",
             
