@@ -1,0 +1,132 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background: #F5F3EE;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:40px;
+}
+
+.profile-container{
+    width:100%;
+    display:flex;
+    justify-content:center;
+
+    
+}
+
+.profile-card{
+    width:400px;;
+    backdrop-filter:blur(12px);
+    border-radius:25px;
+    padding:35px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,0.4);
+}
+
+.profile-img{
+    width:140px;
+    height:140px;
+    border-radius:50%;
+    object-fit:cover;
+    border:5px solid #A8C89B;
+    margin-bottom:20px;
+    display: block;
+    margin: 0 auto;
+}
+
+.profile-card h1{
+    font-size:30px;
+    margin-bottom:8px;
+
+}
+
+.username{
+    color:#4CAF50;
+    margin-bottom:8px;
+}
+.info h4{
+    text-align:center;
+    color: black;
+}
+
+.email{
+    color:black;
+    margin-bottom:25px;
+}
+
+.stats{
+    display:flex;
+    justify-content:space-between;
+    margin:25px 0;
+}
+
+.stats div h3{
+    color:#6BE675;
+    font-size:24px;
+}
+
+.stats div p{
+    font-size:14px;
+    color:#d8d8d8;
+}
+
+.info{
+    text-align:left;
+    margin:25px 0;
+    color: black;
+}
+
+.info p{
+    margin:15px 0;
+    font-size:16px;
+}
+
+.buttons{
+    display: table-cell;
+    flex-direction:column;
+    gap:15px;
+    margin-top:10px;
+}
+
+.buttons button{
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    background:#A8C89B;
+    color:black;
+    font-weight:inherit;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.buttons button:hover{
+    background:#3CB371;
+    transform:translateY(-2px);
+}
+
+.logout:hover{
+    background:#f44336 !important;
+}
+.signature{
+    text-align:center;
+    margin:40px 0 20px;
+    font-size:18px;
+    color:#4D6B46;
+    font-weight:600;
+    letter-spacing:1px;
+}
+
+.signature sup{
+    color:#A8C89B;
+    font-size:12px;
+    font-weight:bold;
+}
