@@ -11,7 +11,7 @@ QUICKMART_SUBCATEGORIES = [
     "beer",
     "wines",
     "juices-carbonates",
-    "cooking- oils-fats",
+    "cooking-oils-fats",
     "sugar",
     "rice-cereals",
     "dairy-products",

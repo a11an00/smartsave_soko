@@ -36,7 +36,7 @@ async def handle_naivas_popups(page, max_wait_time_ms=5000):
     try:
         start_time = asyncio.get_event_loop().time()
         blockers = [
-            # 1. Age Verification Targets s
+            # 1. Age Verification Targets 
             "button:has-text(\"Yes, I'm 18!\")",
             "button:has-text('Yes')",
             
@@ -165,6 +165,19 @@ async def scrape_naivas():
                             const title = img.getAttribute('alt') || '';
                             if (!title) return;
                             
+                            // Prefer the real image URL over lazy-load placeholders
+                            let imageUrl = img.getAttribute('src') || '';
+                            if (!imageUrl || imageUrl.startsWith('data:')) {
+                                imageUrl = img.getAttribute('data-src') || img.getAttribute('data-lazy-src') || imageUrl;
+                            }
+                            // Handle srcset by grabbing the first URL listed
+                            if (!imageUrl) {
+                                const srcset = img.getAttribute('srcset') || img.getAttribute('data-srcset');
+                                if (srcset) {
+                                    imageUrl = srcset.split(',')[0].trim().split(' ')[0];
+                                }
+                            }
+                            
                             let cardElement = wrapper.parentElement;
                             while (cardElement && !cardElement.innerText.includes('KES')) {
                                 if (cardElement.parentElement) {
@@ -175,7 +188,7 @@ async def scrape_naivas():
                             }
                             
                             const textContent = cardElement ? (cardElement.innerText || '') : '';
-                            items.push({ title: title, fullText: textContent });
+                            items.push({ title: title, fullText: textContent, imageUrl: imageUrl });
                         });
                         return items;
                     }
@@ -189,6 +202,17 @@ async def scrape_naivas():
                     for item in extracted_items:
                         raw_title = item['title'].strip()
                         full_card_text = item['fullText']
+                        raw_image_url = (item.get('imageUrl') or '').strip()
+                        
+                        # Resolve protocol-relative or root-relative URLs to absolute ones
+                        image_url = None
+                        if raw_image_url:
+                            if raw_image_url.startswith("//"):
+                                image_url = f"https:{raw_image_url}"
+                            elif raw_image_url.startswith("/"):
+                                image_url = f"https://www.naivas.online{raw_image_url}"
+                            else:
+                                image_url = raw_image_url
                         
                         clean_price = None
                         price_match = re.search(r"KES\s*([\d,]+(?:\.\d{2})?)", full_card_text, re.IGNORECASE)
@@ -201,8 +225,8 @@ async def scrape_naivas():
                                 pass
                                 
                         if raw_title and clean_price:
-                            print(f" -> [Captured] '{raw_title}' - KES {clean_price}")
-                            ingest_scraped_product(db, supermarket_id, raw_title, clean_price)
+                            print(f" -> [Captured] '{raw_title}' - KES {clean_price} - IMG: {image_url or 'N/A'}")
+                            ingest_scraped_product(db, supermarket_id, raw_title, clean_price, image_url=image_url)
                             captured_count += 1
                     
                     print(f"[Naivas] Successfully ingested {captured_count} products for {subcat.upper()}.")

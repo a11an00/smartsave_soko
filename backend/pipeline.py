@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from rapidfuzz import process, fuzz
 import cleaner
 
-def ingest_scraped_product(db: Session, supermarket_id: int, raw_title: str, scrape_price: float):
+def ingest_scraped_product(db: Session, supermarket_id: int, raw_title: str, scrape_price: float, image_url: str = None):
     # 1. Parse the raw title to extract size and unit information
     size_val, size_unit, clean_title = cleaner.parse_volume_and_unit(raw_title)
     
@@ -19,6 +19,13 @@ def ingest_scraped_product(db: Session, supermarket_id: int, raw_title: str, scr
     if mapping_check:
         matched_product_id = mapping_check[0]
         print(f"-> Direct Link Found: '{raw_title}' mapped to Product ID: {matched_product_id}")
+        
+        # Backfill the image if this product doesn't have one on file yet
+        if image_url:
+            db.execute(
+                text("UPDATE products SET image_url = :img WHERE product_id = :p_id AND (image_url IS NULL OR image_url = '')"),
+                {"img": image_url, "p_id": matched_product_id}
+            )
     
     else:
         # 3. FALLBACK TO FUZZY MATCHING (Only for brand new strings)
@@ -38,6 +45,13 @@ def ingest_scraped_product(db: Session, supermarket_id: int, raw_title: str, scr
                 matched_product_id = product_pool[best_match[0]]
                 print(f"-> Fuzzy Match Linked: '{raw_title}' to existing Product ID: {matched_product_id} (Score: {best_match[1]})")
                 
+                # Backfill the image if this product doesn't have one on file yet
+                if image_url:
+                    db.execute(
+                        text("UPDATE products SET image_url = :img WHERE product_id = :p_id AND (image_url IS NULL OR image_url = '')"),
+                        {"img": image_url, "p_id": matched_product_id}
+                    )
+                
                 # Save this relationship so we don't have to fuzzy match it next time
                 db.execute(
                     text("INSERT IGNORE INTO scraped_product_mapping (scraped_name, product_id) VALUES (:raw, :p_id)"),
@@ -47,8 +61,8 @@ def ingest_scraped_product(db: Session, supermarket_id: int, raw_title: str, scr
     # 4. IF COMPLETELY NEW, CREATE THE CATALOG ROW
     if not matched_product_id:
         insert_prod = db.execute(
-            text("INSERT INTO products (unified_name, size_value, size_unit) VALUES (:name, :val, :unit)"),
-            {"name": clean_title, "val": size_val, "unit": size_unit}
+            text("INSERT INTO products (unified_name, size_value, size_unit, image_url) VALUES (:name, :val, :unit, :img)"),
+            {"name": clean_title, "val": size_val, "unit": size_unit, "img": image_url}
         )
         db.commit()
         matched_product_id = insert_prod.lastrowid
