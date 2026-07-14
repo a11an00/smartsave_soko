@@ -1,175 +1,134 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Smart Soko</title>
-    <link rel="stylesheet" href="index.css">
-</head>
-<body>
-
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
     <!-- Navigation -->
     <nav class="navbar">
+      <div class="logo">
+        <h3>SmartSave Soko</h3>
+      </div>
 
-        <div class="logo">
-            <h3>SmartSave Soko</h3>
-        </div>
-
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="cart.html">Cart</a></li>
-            <li><a href="help.html">Help</a></li>
-            <li><a href="profile.html">Profile</a></li>
-        </ul>
-
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="cart.html">Cart</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="help.html">Help</a></li>
+        <li><a href="profile.html">Profile</a></li>
+      </ul>
     </nav>
 
     <!-- Search -->
 
     <section class="search-section">
+      <div class="search-box">
+        <input type="text" placeholder="Search for products..." />
 
-        <div class="search-box">
-
-            <input
-                type="text"
-                placeholder="Search for products...">
-
-            <button>
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
-
-        </div>
-
+        <button>
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </div>
     </section>
 
     <!-- Categories -->
 
     <section class="categories">
+      <h2>Categories</h2>
 
-        <h2>Categories</h2>
-
-        <div class="category-list">
-
-            <button>Food and Groceries</button>
-            <button>Baby and Kids</button>
-            <button>Liquor and Beverage</button>
-            <button>Jewellery</button>
-            <button>Home Decor</button>
-
-        </div>
-
+      <div class="category-list">
+        <button>Food and Groceries</button>
+        <button>Baby and Kids</button>
+        <button>Liquor and Beverage</button>
+        <button>Jewellery</button>
+        <button>Home Decor</button>
+      </div>
     </section>
 
     <!-- Featured Banner -->
 
-    
-
     <!-- Wave Divider -->
 
-   <section class="hero">
+    <section class="hero">
+      <div class="slide active">
+        <img src="images/banner1.jpg.jpg" alt="Banner 1" />
 
-        <div class="slide active">
-    
-            <img src="images/banner1.jpg.jpg" alt="Banner 1">
-    
-            <div class="hero-content">
-    
-                <h1>Discover Timeless Style</h1>
-    
-                <p>Shop modern fashion with vintage charm.</p>
-    
-                <button>Shop Now</button>
-    
-            </div>
-    
+        <div class="hero-content">
+          <h1>Discover Timeless Style</h1>
+
+          <p>Shop modern fashion with vintage charm.</p>
+
+          <button>Shop Now</button>
         </div>
-    
-        <div class="slide">
-    
-            <img src="images/banner2.jpg.jpg" alt="Banner 2">
-    
-            <div class="hero-content">
-    
-                <h1>Fresh Groceries</h1>
-    
-                <p>Everything you need at affordable prices.</p>
-    
-                <button>Shop Now</button>
-    
-            </div>
-    
+      </div>
+
+      <div class="slide">
+        <img src="images/banner2.jpg.jpg" alt="Banner 2" />
+
+        <div class="hero-content">
+          <h1>Fresh Groceries</h1>
+
+          <p>Everything you need at affordable prices.</p>
+
+          <button>Shop Now</button>
         </div>
-    
-        <div class="slide">
-    
-            <img src="images/banner3.jpg.jpg" alt="Banner 3">
-    
-            <div class="hero-content">
-    
-                <h1>Home Essentials</h1>
-    
-                <p>Quality products for every home.</p>
-    
-                <button>Explore</button>
-    
-            </div>
-    
+      </div>
+
+      <div class="slide">
+        <img src="images/banner3.jpg.jpg" alt="Banner 3" />
+
+        <div class="hero-content">
+          <h1>Home Essentials</h1>
+
+          <p>Quality products for every home.</p>
+
+          <button>Explore</button>
         </div>
-    
+      </div>
     </section>
-    <div class="wave">
-    </div>
+    <div class="wave"></div>
 
     <!-- Products -->
 
     <section class="products">
+      <h2>Popular Products</h2>
 
-        <h2>Popular Products</h2>
+      <div class="product-grid">
+        <div class="product-card">
+          <img src="images/eggs.jpg.jpg" alt="eggs" />
 
-        <div class="product-grid">
+          <h3>Eggs</h3>
 
-            <div class="product-card">
+          <p>Ksh 500</p>
 
-                <img src="images/eggs.jpg.jpg" alt="eggs">
-
-                <h3>Eggs</h3>
-
-                <p>Ksh 500</p>
-
-                <button>Add to Cart</button>
-
-            </div>
-
-            <div class="product-card">
-
-                <img src="images/tissues.jpg.jpg" alt="tissues">
-
-                <h3>Tissue Paper</h3>
-
-                <p>Ksh 600</p>
-
-                <button>Add to Cart</button>
-
-            </div>
-
-            <div class="product-card">
-
-                <img src="images/sponge.jpg.jpg" alt="sponge">
-
-                <h3>Sponges</h3>
-
-                <p>Ksh 300</p>
-
-                <button>Add to Cart</button>
-
-            </div>
-
+          <button>Add to Cart</button>
         </div>
 
+        <div class="product-card">
+          <img src="images/tissues.jpg.jpg" alt="tissues" />
+
+          <h3>Tissue Paper</h3>
+
+          <p>Ksh 600</p>
+
+          <button>Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+          <img src="images/sponge.jpg.jpg" alt="sponge" />
+
+          <h3>Sponges</h3>
+
+          <p>Ksh 300</p>
+
+          <button>Add to Cart</button>
+        </div>
+      </div>
     </section>
     <script src="index.js"></script>
-    <p class="signature">
-        🍃 S<sup>3</sup> • SmartSave_Soko
-    </p>
-</body>
+    <p class="signature">🍃 S<sup>3</sup> • SmartSave_Soko</p>
+  </body>
 </html>
