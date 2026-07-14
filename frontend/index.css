@@ -1,0 +1,319 @@
+/*=========================================
+THEME CONFIGURATION (Forest & Honey)
+=========================================*/
+:root {
+  /* Clean, high-contrast backgrounds */
+  --bg-main: #f3f6f9; /* Cool silver-grey racing track background */
+  --bg-card: #ffffff; /* Crisp white for your cards & hero banner */
+  --bg-secondary: #e5ebf4; /* Light dynamic blue-grey for category chips */
+
+  /* The Red Bull Racing Palette */
+  --primary: #001d4a; /* Deep Red Bull Navy (Use this for your Header BG!) */
+  --primary-light: #002e7a; /* Vibrant Red Bull Blue for category text/links */
+  --primary-dark: #000f26; /* Midnight navy for main headers and titles */
+
+  /* High-energy Speed Accents */
+  --accent: #e00424; /* Charging Red Bull Red (Perfect for "Shop Now" & Search buttons) */
+  --accent-hover: #ffcc00; /* Podium Yellow for hover states */
+  --text-dark: #0f172a; /* Sleek carbon-slate for high body readability */
+  --text-muted: #64748b; /* Steel-grey for descriptions and subtitles */
+
+  /* Global design styles */
+  --shadow-soft: 0 4px 20px rgba(0, 29, 74, 0.06); /* Navy-tinted soft shadow */
+  --shadow-medium: 0 10px 30px rgba(0, 29, 74, 0.1);
+  --radius-lg: 16px; /* Sleek, aerodynamic rounded corners */
+  --radius-md: 10px;
+  --transition-smooth: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1); /* Quick, responsive transitions */
+}
+/*=========================================
+GLOBAL STYLES
+=========================================*/
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+  background: var(--bg-main);
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 60px;
+  background: var(--primary-light);
+  box-shadow: var(--shadow-soft);
+}
+
+.logo h2 {
+  color: var(--primary);
+  margin: 0;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 40px;
+  margin: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--primary);
+  font-weight: bold;
+  transition: var(--transition-smooth);
+}
+
+.nav-links a:hover {
+  color: var(--bg-main);
+}
+
+/* Search */
+.search-section {
+  display: flex;
+  justify-content: center;
+  margin: 50px 0;
+}
+
+.search-box {
+  display: flex;
+  width: 500px;
+  box-shadow: var(--shadow-soft);
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.search-box input {
+  flex: 1;
+  padding: 16px 24px;
+  border: none;
+  outline: none;
+  background: var(--bg-card);
+  font-size: 16px;
+  color: var(--text-dark);
+}
+
+.search-box button {
+  width: 70px;
+  border: none;
+  background: var(--primary);
+  color: var(--bg-main);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.search-box button:hover {
+  background: var(--accent);
+  color: white;
+}
+
+/* Categories */
+.categories {
+  width: 90%;
+  margin: auto;
+}
+
+.categories h2 {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.category-list {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.category-list button {
+  border: none;
+  padding: 12px 24px;
+  background: var(--bg-secondary);
+  color: var(--primary);
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.category-list button:hover {
+  background: var(--primary-light);
+  color: var(--primary-dark);
+}
+
+/* Hero Slider */
+.hero {
+  position: relative;
+  width: 90%;
+  height: 440px;
+  margin: 40px auto;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-medium);
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slide.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(55%);
+}
+
+.hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  width: 80%;
+}
+
+.hero-content h1 {
+  font-size: 52px;
+  margin-bottom: 15px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+.hero-content p {
+  font-size: 20px;
+  margin-bottom: 30px;
+  font-weight: 300;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.hero-content button {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 16px 40px;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(208, 162, 82, 0.35);
+  transition: var(--transition-smooth);
+}
+
+.hero-content button:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(208, 162, 82, 0.5);
+}
+
+/* Wave Ornament */
+.wave {
+  font-size: 35px;
+  color: var(--primary-light);
+  text-align: center;
+  margin: 40px 0;
+  letter-spacing: -5px;
+  opacity: 0.7;
+}
+
+/* Products */
+.products {
+  width: 90%;
+  margin: auto;
+  padding-bottom: 80px;
+}
+
+.products h2 {
+  color: var(--primary);
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+}
+
+.product-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  text-align: center;
+  box-shadow: var(--shadow-soft);
+  transition: var(--transition-smooth);
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-medium);
+}
+
+.product-card img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+}
+
+.product-card h3 {
+  color: var(--primary);
+  margin: 20px 0 10px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.product-card p {
+  color: var(--text-muted);
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+
+.product-card button {
+  border: none;
+  background: var(--primary);
+  color: white;
+  padding: 12px 28px;
+  font-weight: 600;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.product-card button:hover {
+  background: var(--accent);
+  color: white;
+}
+
+/* Signature */
+.signature {
+  text-align: center;
+  margin: 60px 0 30px;
+  font-size: 16px;
+  color: var(--text-muted);
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.signature sup {
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: bold;
+}

@@ -1,0 +1,195 @@
+:root {
+  /* Clean, high-contrast backgrounds */
+  --bg-main: #f3f6f9; /* Cool silver-grey racing track background */
+  --bg-card: #ffffff; /* Crisp white card */
+  --bg-secondary: #e5ebf4; /* Light dynamic blue-grey for inputs/details */
+
+  /* The Red Bull Racing Palette */
+  --primary: #001d4a; /* Deep Red Bull Navy (Use this for Navbar BG!) */
+  --primary-light: #002e7a; /* Vibrant Red Bull Blue */
+  --primary-dark: #000f26; /* Midnight navy for main headers/titles */
+
+  /* High-energy Speed Accents */
+  --accent: #e00424; /* Charging Red Bull Red (Checkout/Hero actions) */
+  --accent-hover: #ffcc00; /* Podium Yellow for hover states */
+  --text-dark: #0f172a; /* Sleek carbon-slate for body copy */
+  --text-muted: #64748b; /* Steel-grey for descriptions */
+
+  /* Global design styles */
+  --shadow-soft: 0 4px 20px rgba(0, 29, 74, 0.06);
+  --shadow-medium: 0 10px 30px rgba(0, 29, 74, 0.12); /* Navy-tinted depth shadow */
+  --radius-lg: 24px;
+  --radius-md: 12px;
+  --transition-smooth: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* NAVBAR */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 60px;
+  background: var(--primary); /* Deep Premium Navy background */
+  box-shadow: var(--shadow-soft);
+}
+
+.logo h2 {
+  color: #ffffff; /* White logo to pop off the navy background */
+  margin: 0;
+  font-weight: 800;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 40px;
+  margin: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--bg-secondary); /* Crisp light blue-grey links */
+  font-weight: bold;
+  transition: var(--transition-smooth);
+}
+
+.nav-links a:hover {
+  color: var(--accent-hover); /* Vibrant Yellow hover effect */
+}
+
+/* CART CONTAINER */
+.cart-container {
+  width: 85%;
+  margin: 50px auto;
+}
+
+.cart-container h1 {
+  color: var(--primary-dark);
+  margin-bottom: 30px;
+}
+
+/* CART ITEM */
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-card);
+  padding: 20px;
+  border-radius: var(--radius-lg);
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(0, 29, 74, 0.05); /* Subtle navy card border */
+  transition: var(--transition-smooth);
+}
+
+.cart-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium);
+}
+
+.cart-item img {
+  width: 120px;
+  height: 120px;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+  border: 1px solid var(--bg-secondary);
+}
+
+/* CART DETAILS */
+.cart-details {
+  flex: 1;
+  margin-left: 30px;
+}
+
+.cart-details h3 {
+  color: var(--primary-dark);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.cart-details p {
+  margin: 10px 0;
+  color: var(--text-muted);
+}
+
+.cart-details input {
+  width: 70px;
+  padding: 8px;
+  border: 1px solid var(--bg-secondary);
+  background: var(--bg-main);
+  border-radius: 8px;
+  outline: none;
+  font-weight: bold;
+  color: var(--text-dark);
+  transition: var(--transition-smooth);
+}
+
+.cart-details input:focus {
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 2px rgba(0, 46, 122, 0.15);
+}
+
+/* REMOVE BUTTON (High-visibility Carbon/Red action) */
+.remove-btn {
+  background: #f8e6e8; /* Super soft red tint background */
+  color: var(--accent); /* Electric red text */
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.remove-btn:hover {
+  background: var(--accent); /* Solid red fill on hover */
+  color: #ffffff;
+}
+
+/* SUMMARY & CHECKOUT */
+.cart-summary {
+  text-align: right;
+  margin-top: 40px;
+  color: var(--text-dark);
+}
+
+.cart-summary h2 {
+  color: var(--primary-dark);
+}
+
+.checkout-btn {
+  background: var(--accent); /* Charging Red Bull Red */
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: var(--radius-md);
+  margin-top: 15px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  box-shadow: 0 8px 24px rgba(224, 4, 36, 0.15); /* Soft red button glow */
+}
+
+.checkout-btn:hover {
+  background: var(--accent-hover); /* Pit stop Podium Yellow */
+  color: var(--primary-dark); /* Bold navy text for strong contrast on hover */
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 204, 0, 0.25); /* Yellow glow */
+}
+
+/* SIGNATURE */
+.signature {
+  text-align: center;
+  margin: 40px 0 20px;
+  font-size: 18px;
+  color: var(--primary);
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.signature sup {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: bold;
+}

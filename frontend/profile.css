@@ -1,0 +1,172 @@
+:root {
+  /* Clean, high-contrast backgrounds */
+  --bg-main: #f3f6f9; /* Cool silver-grey racing track background */
+  --bg-card: #ffffff; /* Crisp white card */
+  --bg-secondary: #e5ebf4; /* Light dynamic blue-grey */
+
+  /* The Red Bull Racing Palette */
+  --primary: #001d4a; /* Deep Red Bull Navy */
+  --primary-light: #002e7a; /* Vibrant Red Bull Blue */
+  --primary-dark: #000f26; /* Midnight navy */
+
+  /* High-energy Speed Accents */
+  --accent: #e00424; /* Charging Red Bull Red */
+  --accent-hover: #ffcc00; /* Podium Yellow */
+  --text-dark: #0f172a; /* Sleek carbon-slate */
+  --text-muted: #64748b; /* Steel-grey */
+
+  /* Global design styles */
+  --shadow-soft: 0 4px 20px rgba(0, 29, 74, 0.06); 
+  --shadow-medium: 0 10px 30px rgba(0, 29, 74, 0.12); /* Navy-tinted depth shadow */
+  --radius-lg: 24px;
+  --radius-md: 12px;
+  --transition-smooth: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background: var(--bg-main);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  color: var(--text-dark);
+}
+
+.profile-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.profile-card {
+  width: 400px;
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  border-radius: var(--radius-lg);
+  padding: 35px;
+  text-align: center;
+  box-shadow: var(--shadow-medium);
+  border: 1px solid rgba(0, 29, 74, 0.05); /* Subtle navy card border */
+}
+
+.profile-img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid var(--primary-light); /* Vibrant Blue image border */
+  margin-bottom: 20px;
+  display: block;
+  margin: 0 auto;
+}
+
+.profile-card h1 {
+  font-size: 30px;
+  margin-bottom: 8px;
+  color: var(--primary-dark);
+}
+
+.username {
+  color: var(--primary-light); /* Bold blue username */
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.email {
+  color: var(--text-muted);
+  margin-bottom: 25px;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-between;
+  margin: 25px 0;
+  background: var(--bg-secondary); /* Soft background container for stats */
+  padding: 15px;
+  border-radius: var(--radius-md);
+}
+
+.stats div h3 {
+  color: var(--accent); /* Electric Red for key highlight stats */
+  font-size: 24px;
+}
+
+.stats div p {
+  font-size: 14px;
+  color: var(--primary-dark);
+  font-weight: 500;
+}
+
+.info {
+  text-align: left;
+  margin: 25px 0;
+  color: var(--text-dark);
+}
+
+.info h4 {
+  text-align: center;
+  color: var(--primary-dark);
+  margin-bottom: 10px;
+}
+
+.info p {
+  margin: 15px 0;
+  font-size: 16px;
+}
+
+.buttons {
+  display: flex; /* Swapped table-cell to flex for cleaner layout alignment */
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.buttons button {
+  padding: 14px;
+  border: none;
+  border-radius: var(--radius-md);
+  background: var(--accent); /* Energizing Red button */
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.buttons button:hover {
+  background: var(--accent-hover); /* Switches to Podium Yellow on hover */
+  color: var(--primary-dark); /* Contrast Navy text on hover */
+  transform: translateY(-2px);
+}
+
+.buttons .logout {
+  background: var(--primary-light); /* Secondary actions get Blue */
+}
+
+.buttons .logout:hover {
+  background: var(--accent) !important; /* Logout hover snaps to Red */
+  color: #ffffff;
+}
+
+.signature {
+  text-align: center;
+  margin: 40px 0 20px;
+  font-size: 18px;
+  color: var(--primary);
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.signature sup {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: bold;
+}

@@ -1,0 +1,160 @@
+:root {
+  /* Clean, high-contrast backgrounds */
+  --bg-main: #f3f6f9; /* Cool silver-grey racing track background */
+  --bg-card: #ffffff; /* Crisp white card */
+  --bg-secondary: #e5ebf4; /* Light dynamic blue-grey for inputs */
+
+  /* The Red Bull Racing Palette */
+  --primary: #001d4a; /* Deep Red Bull Navy */
+  --primary-light: #002e7a; /* Vibrant Red Bull Blue */
+  --primary-dark: #000f26; /* Midnight navy */
+
+  /* High-energy Speed Accents */
+  --accent: #e00424; /* Charging Red Bull Red */
+  --accent-hover: #ffcc00; /* Podium Yellow */
+  --text-dark: #0f172a; /* Sleek carbon-slate */
+  --text-muted: #64748b; /* Steel-grey */
+
+  /* Global design styles */
+  --shadow-soft: 0 4px 20px rgba(0, 29, 74, 0.06); 
+  --shadow-medium: 0 10px 30px rgba(0, 29, 74, 0.12); /* Navy-tinted depth shadow */
+  --radius-lg: 24px;
+  --radius-md: 12px;
+  --transition-smooth: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  background: var(--bg-main);
+  color: var(--text-dark);
+}
+
+.login-card {
+  width: 420px;
+  background: var(--bg-card);
+  padding: 40px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-medium);
+  border: 1px solid rgba(0, 29, 74, 0.05); /* Subtle navy border */
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.login-icon {
+  font-size: 60px;
+  color: var(--primary-light); /* Electric Blue icon */
+  margin-bottom: 15px;
+}
+
+.login-header h1 {
+  color: var(--primary-dark);
+  margin-bottom: 10px;
+}
+
+.login-header p {
+  color: var(--text-muted);
+}
+
+.login-input {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--bg-secondary); /* Dynamic light blue-grey border */
+  background: var(--bg-main); /* Slightly darker input field background */
+  border-radius: var(--radius-md);
+  padding: 12px;
+  margin-bottom: 20px;
+  transition: var(--transition-smooth);
+}
+
+.login-input:focus-within {
+  border-color: var(--primary-light); /* Glow blue on focus */
+  box-shadow: 0 0 0 3px rgba(0, 46, 122, 0.15);
+}
+
+.login-input i {
+  color: var(--primary-light); /* Sharp blue utility icons */
+  margin-right: 10px;
+}
+
+.login-input input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 16px;
+  background: transparent;
+  color: var(--text-dark);
+}
+
+.login-options {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+  font-size: 14px;
+}
+
+.login-options a {
+  color: var(--primary-light);
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--transition-smooth);
+}
+
+.login-options a:hover {
+  color: var(--accent); /* Turn red on hover */
+}
+
+.login-btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: var(--radius-md);
+  background: var(--accent); /* Bold Red Bull Red */
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.login-btn:hover {
+  background: var(--accent-hover); /* Pit stop Yellow hover */
+  color: var(--primary-dark); /* Highly readable dark navy text on yellow background */
+  transform: translateY(-2px);
+}
+
+.login-footer {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.login-footer a {
+  color: var(--primary-light);
+  font-weight: bold;
+  text-decoration: none;
+  transition: var(--transition-smooth);
+}
+
+.login-footer a:hover {
+  color: var(--accent);
+}
+
+.signature {
+  text-align: center;
+  margin: 40px 0 20px;
+  font-size: 18px;
+  color: var(--primary);
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.signature sup {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: bold;
+}

@@ -1,0 +1,153 @@
+:root {
+  /* Clean, high-contrast backgrounds */
+  --bg-main: #f3f6f9; /* Cool silver-grey racing track background */
+  --bg-card: #ffffff; /* Crisp white card */
+  --bg-secondary: #e5ebf4; /* Light dynamic blue-grey */
+
+  /* The Red Bull Racing Palette */
+  --primary: #001d4a; /* Deep Red Bull Navy (Use this for Navbar BG!) */
+  --primary-light: #002e7a; /* Vibrant Red Bull Blue */
+  --primary-dark: #000f26; /* Midnight navy */
+
+  /* High-energy Speed Accents */
+  --accent: #e00424; /* Charging Red Bull Red */
+  --accent-hover: #ffcc00; /* Podium Yellow */
+  --text-dark: #0f172a; /* Sleek carbon-slate */
+  --text-muted: #64748b; /* Steel-grey */
+
+  /* Global design styles */
+  --shadow-soft: 0 4px 20px rgba(0, 29, 74, 0.06); 
+  --shadow-medium: 0 10px 30px rgba(0, 29, 74, 0.12); /* Navy-tinted depth shadow */
+  --radius-lg: 24px;
+  --radius-md: 12px;
+  --transition-smooth: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* NAVBAR */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 60px;
+  background: var(--primary); /* Deep Premium Navy background */
+  box-shadow: var(--shadow-soft);
+}
+
+.logo h2 {
+  color: #ffffff; /* White logo to pop off the navy background */
+  margin: 0;
+  font-weight: 800;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 40px;
+  margin: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--bg-secondary); /* Crisp light blue-grey links */
+  font-weight: bold;
+  transition: var(--transition-smooth);
+}
+
+.nav-links a:hover {
+  color: var(--accent-hover); /* Vibrant Yellow hover effect */
+}
+
+/* HELP / FAQ CONTAINER */
+.help-container {
+  width: 85%;
+  max-width: 900px;
+  margin: 50px auto;
+}
+
+.help-container h1 {
+  text-align: center;
+  color: var(--primary-dark);
+  margin-bottom: 10px;
+}
+
+.help-intro {
+  text-align: center;
+  color: var(--text-muted);
+  margin-bottom: 40px;
+}
+
+/* FAQ CARDS */
+.faq-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  padding: 25px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(0, 29, 74, 0.05); /* Subtle navy card border */
+  transition: var(--transition-smooth);
+}
+
+.faq-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-medium);
+  border-color: var(--primary-light); /* Lights up with blue on card hover */
+}
+
+.faq-card h3 {
+  color: var(--primary-dark);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.faq-card i {
+  color: var(--primary-light); /* Clean blue utility icons */
+  margin-right: 10px;
+}
+
+.faq-card p {
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+/* CONTACT CTA CARD */
+.contact-card {
+  background: var(--accent); /* Charging Red Bull Red banner */
+  color: #ffffff;
+  border-radius: var(--radius-lg);
+  padding: 30px;
+  margin-top: 40px;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(224, 4, 36, 0.25); /* Subtle red glow */
+}
+
+.contact-card h2 {
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.contact-card p {
+  margin: 12px 0;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.9); /* High contrast readable white-text */
+}
+
+.contact-card i {
+  margin-right: 10px;
+}
+
+/* SIGNATURE */
+.signature {
+  text-align: center;
+  margin: 40px 0 20px;
+  font-size: 18px;
+  color: var(--primary);
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.signature sup {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: bold;
+}
