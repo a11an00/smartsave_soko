@@ -3,83 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CART</title>
+    <title>Cart | SmartSave Soko</title>
+    <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="cart.css">
 </head>
 <body>
-    <nav class="navbar">
 
-        <div class="logo">
-            <h3>SmartSave Soko</h3>
-        </div>
+<nav class="navbar">
+    <div class="logo"><h3>SmartSave Soko</h3></div>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="cart.html">Cart</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="help.html">Help</a></li>
+        <li><a href="profile.html">Profile</a></li>
+    </ul>
+</nav>
 
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="cart.html">Cart</a></li>
-            <li><a href="login.html">Login</a></li>
-            <li><a href="profile.html">Profile</a></li>
-            <li><a href="help.html">Help</a></li>
-        </ul>
-        </ul>
-
-    </nav>
-<div class="cart-container">
-
-    <h1><u>My Cart</u></h1>
-
-    <div class="cart-item">
-
-        <img src="images/cart2.jpg.jpg" alt="Product">
-
-        <div class="cart-details">
-
-            <h3>Red Wine</h3>
-
-            <p>Ksh 3,000</p>
-
-            <label>Quantity</label>
-            <input type="number" value="1" min="1">
-
-        </div>
-
-        <button class="remove-btn">Remove</button>
-
+<section class="cart-section">
+    <h2>Your Cart</h2>
+    <div id="cart-items">
+        <p>Loading cart...</p>
     </div>
 
-    <div class="cart-item">
-
-        <img src="images/cart.jpg.jpg" alt="Product">
-
-        <div class="cart-details">
-
-            <h3>Leather Shoes</h3>
-
-            <p>Ksh 4,200</p>
-
-            <label>Quantity</label>
-            <input type="number" value="1" min="1">
-
-        </div>
-
-        <button class="remove-btn">Remove</button>
-
+    <div class="cart-summary" id="cart-summary" style="display:none;">
+        <label for="threshold-input">
+            Only recommend splitting stores if it saves at least (KES):
+        </label>
+        <input type="number" id="threshold-input" value="150" min="0" />
+        <button id="compare-btn">Compare Prices</button>
     </div>
+</section>
 
-    <div class="cart-summary">
+<section class="comparison-section" id="comparison-section" style="display:none;">
+    <h2>Price Comparison</h2>
+    <div id="comparison-results"></div>
+</section>
 
-        <h2>Total: Ksh 7,200</h2>
+<p class="signature">🍃 S<sup>3</sup> • SmartSave_Soko</p>
 
-        <button class="checkout-btn">
-
-            Proceed to Checkout
-
-        </button>
-
-    </div>
-
-</div>
-<p class="signature">
-    🍃 S<sup>3</sup> • SmartSave Soko
-</p>
+<script src="cart.js"></script>
 </body>
 </html>

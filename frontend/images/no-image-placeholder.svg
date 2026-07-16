@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
+  <rect width="300" height="300" fill="#EFEAE0"/>
+  <g transform="translate(150,130)" fill="none" stroke="#6B7B72" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="-55" y="-35" width="110" height="80" rx="8"/>
+    <circle cx="0" cy="0" r="20"/>
+    <rect x="-20" y="-55" width="40" height="20" rx="4"/>
+  </g>
+  <text x="150" y="225" font-family="Arial, sans-serif" font-size="16" fill="#6B7B72" text-anchor="middle">
+    No Image Available
+  </text>
+</svg>

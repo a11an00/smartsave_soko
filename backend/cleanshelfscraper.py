@@ -127,12 +127,27 @@ async def scrape_cleanshelf():
                         (subcatLower) => {
                             const data = [];
                             const elements = document.querySelectorAll('p, span, div, h3, h4, h5, a');
+
+                            const extractImageFromEl = (imgEl) => {
+                                let url = imgEl.getAttribute('src') || '';
+                                if (!url || url.startsWith('data:')) {
+                                    url = imgEl.getAttribute('data-src') || imgEl.getAttribute('data-lazy-src') || url;
+                                }
+                                if (!url) {
+                                    const srcset = imgEl.getAttribute('srcset') || imgEl.getAttribute('data-srcset');
+                                    if (srcset) {
+                                        url = srcset.split(',')[0].trim().split(' ')[0];
+                                    }
+                                }
+                                return url;
+                            };
                             
                             elements.forEach(el => {
                                 const text = el.innerText ? el.innerText.trim() : '';
                                 if (text && (text.startsWith('KES') || text.startsWith('Ksh') || /^\d{2,4}(\.\d{2})?$/.test(text))) {
                                     let parent = el.parentElement;
                                     let title = "";
+                                    let imageUrl = "";
                                     let attempts = 0;
                                     
                                     while (parent && attempts < 5) {
@@ -151,6 +166,15 @@ async def scrape_cleanshelf():
                                                 break;
                                             }
                                         }
+
+                                        // Look for a nearby image in this same ancestor scope
+                                        if (!imageUrl) {
+                                            const imgEl = parent.querySelector('img');
+                                            if (imgEl) {
+                                                imageUrl = extractImageFromEl(imgEl);
+                                            }
+                                        }
+
                                         if (title) break;
                                         parent = parent.parentElement;
                                         attempts++;
@@ -176,7 +200,8 @@ async def scrape_cleanshelf():
                                     if (title && title.length < 90) {
                                         data.push({ 
                                             title: title, 
-                                            fullText: el.parentElement ? el.parentElement.innerText : text 
+                                            fullText: el.parentElement ? el.parentElement.innerText : text,
+                                            imageUrl: imageUrl
                                         });
                                     }
                                 }
@@ -193,6 +218,16 @@ async def scrape_cleanshelf():
                             for item in extracted_items:
                                 raw_title = item['title'].strip()
                                 full_card_text = item['fullText']
+
+                                raw_image_url = (item.get('imageUrl') or '').strip()
+                                image_url = None
+                                if raw_image_url:
+                                    if raw_image_url.startswith("//"):
+                                        image_url = f"https:{raw_image_url}"
+                                    elif raw_image_url.startswith("/"):
+                                        image_url = f"https://cleanshelf.online{raw_image_url}"
+                                    else:
+                                        image_url = raw_image_url
                                 
                                 if any(x in raw_title.lower() for x in ['cart', 'checkout', 'login', 'account', 'menu', 'shop', 'categories']):
                                     continue
@@ -209,8 +244,8 @@ async def scrape_cleanshelf():
 
                                 if raw_title and clean_price and clean_price > 5:
                                     if raw_title.lower() != subcat.lower():
-                                        print(f"  -> [Captured] '{raw_title}' - KES {clean_price}")
-                                        ingest_scraped_product(db, supermarket_id, raw_title, clean_price)
+                                        print(f"  -> [Captured] '{raw_title}' - KES {clean_price} - IMG: {image_url or 'N/A'}")
+                                        ingest_scraped_product(db, supermarket_id, raw_title, clean_price, image_url=image_url, category=subcat)
                         finally:
                             db.close()
 

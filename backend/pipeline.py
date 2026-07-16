@@ -3,14 +3,13 @@ from sqlalchemy.orm import Session
 from rapidfuzz import process, fuzz
 import cleaner
 
-def ingest_scraped_product(db: Session, supermarket_id: int, raw_title: str, scrape_price: float, image_url: str = None):
+def ingest_scraped_product(db: Session, supermarket_id: int, raw_title: str, scrape_price: float, image_url: str = None, category: str = None):
     # 1. Parse the raw title to extract size and unit information
     size_val, size_unit, clean_title = cleaner.parse_volume_and_unit(raw_title)
     
     matched_product_id = None
 
     # 2. CHECK EXPLICIT MAPPING FIRST (The "Memory" Cache)
-    # This completely bypasses fuzzy matching for items we already know about
     mapping_check = db.execute(
         text("SELECT product_id FROM scraped_product_mapping WHERE scraped_name = :raw_name"),
         {"raw_name": raw_title}
@@ -20,11 +19,16 @@ def ingest_scraped_product(db: Session, supermarket_id: int, raw_title: str, scr
         matched_product_id = mapping_check[0]
         print(f"-> Direct Link Found: '{raw_title}' mapped to Product ID: {matched_product_id}")
         
-        # Backfill the image if this product doesn't have one on file yet
         if image_url:
             db.execute(
                 text("UPDATE products SET image_url = :img WHERE product_id = :p_id AND (image_url IS NULL OR image_url = '')"),
                 {"img": image_url, "p_id": matched_product_id}
+            )
+
+        if category:
+            db.execute(
+                text("UPDATE products SET category = :cat WHERE product_id = :p_id AND (category IS NULL OR category = '')"),
+                {"cat": category, "p_id": matched_product_id}
             )
     
     else:
@@ -37,22 +41,24 @@ def ingest_scraped_product(db: Session, supermarket_id: int, raw_title: str, scr
         if existing_products:
             product_pool = {p[1]: p[0] for p in existing_products} 
             
-            # Using token_set_ratio handles additions/omissions of words (like "Beer" vs "Lager") beautifully
             best_match = process.extractOne(clean_title, product_pool.keys(), scorer=fuzz.token_set_ratio)
             
-            # 80-85 threshold works great with token_set_ratio
             if best_match and best_match[1] >= 82:
                 matched_product_id = product_pool[best_match[0]]
                 print(f"-> Fuzzy Match Linked: '{raw_title}' to existing Product ID: {matched_product_id} (Score: {best_match[1]})")
                 
-                # Backfill the image if this product doesn't have one on file yet
                 if image_url:
                     db.execute(
                         text("UPDATE products SET image_url = :img WHERE product_id = :p_id AND (image_url IS NULL OR image_url = '')"),
                         {"img": image_url, "p_id": matched_product_id}
                     )
+
+                if category:
+                    db.execute(
+                        text("UPDATE products SET category = :cat WHERE product_id = :p_id AND (category IS NULL OR category = '')"),
+                        {"cat": category, "p_id": matched_product_id}
+                    )
                 
-                # Save this relationship so we don't have to fuzzy match it next time
                 db.execute(
                     text("INSERT IGNORE INTO scraped_product_mapping (scraped_name, product_id) VALUES (:raw, :p_id)"),
                     {"raw": raw_title, "p_id": matched_product_id}
@@ -61,14 +67,13 @@ def ingest_scraped_product(db: Session, supermarket_id: int, raw_title: str, scr
     # 4. IF COMPLETELY NEW, CREATE THE CATALOG ROW
     if not matched_product_id:
         insert_prod = db.execute(
-            text("INSERT INTO products (unified_name, size_value, size_unit, image_url) VALUES (:name, :val, :unit, :img)"),
-            {"name": clean_title, "val": size_val, "unit": size_unit, "img": image_url}
+            text("INSERT INTO products (unified_name, size_value, size_unit, image_url, category) VALUES (:name, :val, :unit, :img, :cat)"),
+            {"name": clean_title, "val": size_val, "unit": size_unit, "img": image_url, "cat": category}
         )
         db.commit()
         matched_product_id = insert_prod.lastrowid
         print(f"-> Created Catalog Row: {clean_title} ({size_val}{size_unit})")
         
-        # Save the initial mapping string
         db.execute(
             text("INSERT IGNORE INTO scraped_product_mapping (scraped_name, product_id) VALUES (:raw, :p_id)"),
             {"raw": raw_title, "p_id": matched_product_id}

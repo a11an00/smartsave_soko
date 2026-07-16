@@ -26,9 +26,9 @@
 
     <section class="search-section">
       <div class="search-box">
-        <input type="text" placeholder="Search for products..." />
+        <input type="text" id="search-input" placeholder="Search for products..." />
 
-        <button>
+        <button id="search-btn">
           <i class="fa-solid fa-magnifying-glass"></i>
         </button>
       </div>
@@ -40,11 +40,11 @@
       <h2>Categories</h2>
 
       <div class="category-list">
-        <button>Food and Groceries</button>
-        <button>Baby and Kids</button>
-        <button>Liquor and Beverage</button>
-        <button>Jewellery</button>
-        <button>Home Decor</button>
+        <button class="category-btn" data-category="food-and-groceries">Food and Groceries</button>
+        <button class="category-btn" data-category="liquor-and-beverage">Liquor and Beverage</button>
+        <button disabled title="Coming soon">Baby and Kids</button>
+        <button disabled title="Coming soon">Jewellery</button>
+        <button disabled title="Coming soon">Home Decor</button>
       </div>
     </section>
 
@@ -53,79 +53,42 @@
     <!-- Wave Divider -->
 
     <section class="hero">
-      <div class="slide active">
-        <img src="images/banner1.jpg.jpg" alt="Banner 1" />
-
-        <div class="hero-content">
-          <h1>Discover Timeless Style</h1>
-
-          <p>Shop modern fashion with vintage charm.</p>
-
-          <button>Shop Now</button>
+      <div class="slide active store-slide store-slide-1">
+        <div class="hero-content store-wordmark-content">
+          <p class="store-wordmark">naivas</p>
+          <p class="store-tagline">We compare their prices in real time, so you always know when they're cheapest.</p>
         </div>
       </div>
 
-      <div class="slide">
-        <img src="images/banner2.jpg.jpg" alt="Banner 2" />
-
-        <div class="hero-content">
-          <h1>Fresh Groceries</h1>
-
-          <p>Everything you need at affordable prices.</p>
-
-          <button>Shop Now</button>
+      <div class="slide store-slide store-slide-2">
+        <div class="hero-content store-wordmark-content">
+          <p class="store-wordmark">Quickmart</p>
+          <p class="store-tagline">Every Quickmart deal, checked against the competition automatically.</p>
         </div>
       </div>
 
-      <div class="slide">
-        <img src="images/banner3.jpg.jpg" alt="Banner 3" />
-
-        <div class="hero-content">
-          <h1>Home Essentials</h1>
-
-          <p>Quality products for every home.</p>
-
-          <button>Explore</button>
+      <div class="slide store-slide store-slide-3">
+        <div class="hero-content store-wordmark-content">
+          <p class="store-wordmark">cleanshelf</p>
+          <p class="store-tagline">See exactly when Cleanshelf beats the rest — and by how much.</p>
         </div>
       </div>
     </section>
     <div class="wave"></div>
 
+    <!-- Search Results (populated dynamically by index.js) -->
+
+    <section class="search-results-section" id="search-results-section" style="display: none;">
+      <h2>Search Results</h2>
+      <div class="product-grid" id="search-results-grid"></div>
+    </section>
+
     <!-- Products -->
 
-    <section class="products">
+    <section class="products" id="popular-products-section">
       <h2>Popular Products</h2>
-
-      <div class="product-grid">
-        <div class="product-card">
-          <img src="images/eggs.jpg.jpg" alt="eggs" />
-
-          <h3>Eggs</h3>
-
-          <p>Ksh 500</p>
-
-          <button>Add to Cart</button>
-        </div>
-
-        <div class="product-card">
-          <img src="images/tissues.jpg.jpg" alt="tissues" />
-
-          <h3>Tissue Paper</h3>
-
-          <p>Ksh 600</p>
-
-          <button>Add to Cart</button>
-        </div>
-
-        <div class="product-card">
-          <img src="images/sponge.jpg.jpg" alt="sponge" />
-
-          <h3>Sponges</h3>
-
-          <p>Ksh 300</p>
-
-          <button>Add to Cart</button>
-        </div>
+      <div class="product-grid" id="popular-products-grid">
+        <p>Loading products...</p>
       </div>
     </section>
     <script src="index.js"></script>

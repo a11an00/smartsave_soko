@@ -226,7 +226,7 @@ async def scrape_naivas():
                                 
                         if raw_title and clean_price:
                             print(f" -> [Captured] '{raw_title}' - KES {clean_price} - IMG: {image_url or 'N/A'}")
-                            ingest_scraped_product(db, supermarket_id, raw_title, clean_price, image_url=image_url)
+                            ingest_scraped_product(db, supermarket_id, raw_title, clean_price, image_url=image_url, category=subcat)
                             captured_count += 1
                     
                     print(f"[Naivas] Successfully ingested {captured_count} products for {subcat.upper()}.")

@@ -3,43 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | SmartSave Soko</title>
+    <title>Sign Up | SmartSave Soko</title>
     <link rel="stylesheet" href="login.css">
 </head>
 <body>
 <div class="login-container">
     <div class="login-card">
         <div class="login-header">
-            <i class="fa-solid fa-user login-icon"></i>
-            <h1>Welcome Back!</h1>
-            <p>Sign in to continue shopping.</p>
+            <i class="fa-solid fa-user-plus login-icon"></i>
+            <h1>Create Your Account</h1>
+            <p>Start saving on your shopping today.</p>
         </div>
-        <form id="login-form">
+        <form id="signup-form">
             <div class="login-input">
                 <i class="fa-solid fa-envelope"></i>
                 <input type="email"
-                placeholder="Email Address" id="login-email" required>
+                placeholder="Email Address" id="signup-email" required>
             </div>
             <div class="login-input">
                 <i class="fa-solid fa-lock"></i>
                 <input type="password"
-                placeholder="Password" id="login-password" required>
+                placeholder="Password (min. 6 characters)" id="signup-password" required minlength="6">
             </div>
-            <div class="login-options">
-                <label>
-                    <input type="checkbox" id="remember-me">
-                    Remember Me
-                </label>
-                <a href="#">Forgot Password?</a>
+            <div class="login-input">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password"
+                placeholder="Confirm Password" id="signup-confirm-password" required minlength="6">
             </div>
             <button class="login-btn" type="submit">
-                Login
+                Sign Up
             </button>
         </form>
         <div class="login-footer">
             <p>
-                Don't have an account?
-                <a href="signup.html">Sign Up</a>
+                Already have an account?
+                <a href="login.html">Login</a>
             </p>
         </div>
     </div>
@@ -47,6 +45,6 @@
 <p class="signature">
     🍃 S<sup>3</sup> • SmartSave_Soko
 </p>
-<script src="login.js"></script>
+<script src="signup.js"></script>
 </body>
 </html>

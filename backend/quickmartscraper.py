@@ -120,10 +120,25 @@ async def scrape_quickmart():
                                 } else if (img) {
                                     title = img.getAttribute('alt') || img.getAttribute('title') || '';
                                 }
+
+                                // Prefer the real image URL over lazy-load placeholders
+                                let imageUrl = "";
+                                if (img) {
+                                    imageUrl = img.getAttribute('src') || '';
+                                    if (!imageUrl || imageUrl.startsWith('data:')) {
+                                        imageUrl = img.getAttribute('data-src') || img.getAttribute('data-lazy-src') || imageUrl;
+                                    }
+                                    if (!imageUrl) {
+                                        const srcset = img.getAttribute('srcset') || img.getAttribute('data-srcset');
+                                        if (srcset) {
+                                            imageUrl = srcset.split(',')[0].trim().split(' ')[0];
+                                        }
+                                    }
+                                }
                                 
                                 const textContent = card.innerText || '';
                                 if (title.trim() && textContent.length < 500 && (textContent.includes('KES') || textContent.includes('Ksh') || /\\d/.test(textContent))) {
-                                    items.push({ title: title, fullText: textContent });
+                                    items.push({ title: title, fullText: textContent, imageUrl: imageUrl });
                                 }
                             });
                             return items;
@@ -138,6 +153,16 @@ async def scrape_quickmart():
                         for item in extracted_items:
                             raw_title = re.sub(r'\s+', ' ', item['title'].strip())
                             full_card_text = item['fullText']
+
+                            raw_image_url = (item.get('imageUrl') or '').strip()
+                            image_url = None
+                            if raw_image_url:
+                                if raw_image_url.startswith("//"):
+                                    image_url = f"https:{raw_image_url}"
+                                elif raw_image_url.startswith("/"):
+                                    image_url = f"https://www.quickmart.co.ke{raw_image_url}"
+                                else:
+                                    image_url = raw_image_url
                             
                             price_match = re.search(r"(?:KES|Ksh|Sh)\s*([\d,]+(?:\.\d{2})?)", full_card_text, re.IGNORECASE)
                             clean_price = None
@@ -148,8 +173,8 @@ async def scrape_quickmart():
                                 
                             if raw_title and clean_price and 10 < clean_price < 150000:
                                 if len(raw_title) < 90 and raw_title.lower() != subcat.lower():
-                                    print(f" -> [Captured] '{raw_title}' - KES {clean_price}")
-                                    ingest_scraped_product(db, supermarket_id, raw_title, clean_price)
+                                    print(f" -> [Captured] '{raw_title}' - KES {clean_price} - IMG: {image_url or 'N/A'}")
+                                    ingest_scraped_product(db, supermarket_id, raw_title, clean_price, image_url=image_url, category=subcat)
                     finally:
                         db.close()
 
