@@ -1,32 +1,54 @@
 /*=========================================
 THEME CONFIGURATION (Forest & Honey)
 =========================================*/
-:root {
+ :root {
+
   /* Soko Market palette — fresh produce, trust, and value */
+
   --bg-main: #FAF7F1; /* Warm ivory background */
+
   --bg-card: #ffffff; /* Crisp white for cards & hero banner */
+
   --bg-secondary: #EFEAE0; /* Soft warm neutral for category chips */
 
+
   /* Primary: Deep Market Green */
+
   --primary: #1B4332; /* Deep Market Green (Header BG) */
+
   --primary-light: #2D5F47; /* Slightly lighter green for links/hover */
+
   --primary-dark: #0F2E22; /* Forest Shadow for headers/titles */
 
+
   /* Accent: Sokoni Gold */
+
   --accent: #D9A441; /* Sokoni Gold (Shop Now, Search, Add to Cart buttons) */
+
   --accent-hover: #B8791F; /* Burnt Amber hover state */
+
   --text-dark: #1C2B22; /* Charcoal Green for body readability */
+
   --text-muted: #6B7B72; /* Sage Grey for descriptions and subtitles */
 
+
   /* Savings highlight */
+
   --success: #4CAF6D; /* Leaf Green for "You saved KES X" banners */
 
+
   /* Global design styles */
+
   --shadow-soft: 0 4px 20px rgba(27, 67, 50, 0.08); /* Green-tinted soft shadow */
+
   --shadow-medium: 0 10px 30px rgba(27, 67, 50, 0.12);
+
   --radius-lg: 16px;
+
   --radius-md: 10px;
+
   --transition-smooth: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1); /* Quick, responsive transitions */
+
 }
 /*=========================================
 GLOBAL STYLES

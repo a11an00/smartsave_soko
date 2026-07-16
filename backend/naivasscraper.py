@@ -26,7 +26,7 @@ NAIVAS_SUBCATEGORIES = [
 
 ]
 
-MAX_SCROLL_ATTEMPTS = 5  #shows how deep the scraper will scroll to load more products, can be adjusted based on the expected number of products per subcategory
+MAX_SCROLL_ATTEMPTS = 7 #shows how deep the scraper will scroll to load more products, can be adjusted based on the expected number of products per subcategory
 
 async def handle_naivas_popups(page, max_wait_time_ms=5000):
     """

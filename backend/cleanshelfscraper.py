@@ -24,7 +24,7 @@ CLEANSHELF_SUBCATEGORIES = [
 
 ]
 
-TOTAL_PAGES_TO_SCRAPE = 3 
+TOTAL_PAGES_TO_SCRAPE = 7
 
 async def handle_cleanshelf_popups(page, max_wait_time_ms=5000):
     """

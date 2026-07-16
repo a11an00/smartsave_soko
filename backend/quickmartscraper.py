@@ -19,7 +19,7 @@ QUICKMART_SUBCATEGORIES = [
     "tv",
 ]
 
-MAX_PAGES_PER_CATEGORY = 3  # Safeguard boundary limit
+MAX_PAGES_PER_CATEGORY = 7 # Safeguard boundary limit
 #handle all popups that may appear on the page, such as age gates, location screens, and initial cookie overlays
 async def handle_quickmart_popups(page, max_wait_time_ms=5000):
     """Destroys age gates, location screens, and initial cookie overlays."""
