@@ -1,0 +1,136 @@
+.login-container{
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:90vh;
+
+}
+
+.login-card{
+
+    width:420px;
+    background:white;
+    padding:40px;
+    border-radius:25px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+.login-header{
+
+    text-align:center;
+    margin-bottom:30px;
+
+}
+
+.login-icon{
+
+    font-size:60px;
+    color:#A8C89B;
+    margin-bottom:15px;
+
+}
+
+.login-header h1{
+
+    color:#4D6B46;
+    margin-bottom:10px;
+
+}
+
+.login-header p{
+
+    color:#666;
+
+}
+
+.login-input{
+
+    display:flex;
+    align-items:center;
+    border:1px solid #DCE9D5;
+    border-radius:12px;
+    padding:12px;
+    margin-bottom:20px;
+
+}
+
+.login-input i{
+
+    color:#A8C89B;
+    margin-right:10px;
+
+}
+
+.login-input input{
+
+    border:none;
+    outline:none;
+    width:100%;
+    font-size:16px;
+
+}
+
+.login-options{
+
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:25px;
+    font-size:14px;
+
+}
+
+.login-options a{
+
+    color:#4D6B46;
+    text-decoration:none;
+
+}
+
+.login-btn{
+
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    background:#A8C89B;
+    color:white;
+    font-size:16px;
+
+}
+
+.login-btn:hover{
+
+    background:#8FB483;
+
+}
+
+.login-footer{
+
+    text-align:center;
+    margin-top:25px;
+
+}
+
+.login-footer a{
+
+    color:#4D6B46;
+    font-weight:bold;
+    text-decoration:none;
+
+}
+.signature{
+    text-align:center;
+    margin:40px 0 20px;
+    font-size:18px;
+    color:#4D6B46;
+    font-weight:600;
+    letter-spacing:1px;
+}
+
+.signature sup{
+    color:#A8C89B;
+    font-size:12px;
+    font-weight:bold;
+}
