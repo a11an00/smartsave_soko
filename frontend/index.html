@@ -26,10 +26,14 @@
 
     <section class="search-section">
       <div class="search-box">
-        <input type="text" id="search-input" placeholder="Search for products..." />
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Search for products..."
+        />
 
         <button id="search-btn">
-          <i class="fa-solid fa-magnifying-glass"></i>
+          <i class="fa-solid fa-magnifying-glass">🔍</i>
         </button>
       </div>
     </section>
@@ -40,11 +44,17 @@
       <h2>Categories</h2>
 
       <div class="category-list">
-        <button class="category-btn" data-category="food-and-groceries">Food and Groceries</button>
-        <button class="category-btn" data-category="liquor-and-beverage">Liquor and Beverage</button>
-        <button disabled title="Coming soon">Baby and Kids</button>
-        <button disabled title="Coming soon">Jewellery</button>
-        <button disabled title="Coming soon">Home Decor</button>
+        <button class="category-btn" data-category="food-and-groceries">
+          cooking oils
+        </button>
+        <button class="category-btn" data-category="liquor-and-beverage">
+          Liquor and Beverage
+        </button>
+        <button class="category-btn" data-category="soda-and-drinks">
+          soda and drinks
+        </button>
+        <button class="category-btn" data-category="cereals">cereals</button>
+        <button class="category-btn" data-category="flour">flour</button>
       </div>
     </section>
 
@@ -53,32 +63,48 @@
     <!-- Wave Divider -->
 
     <section class="hero">
-      <div class="slide active store-slide store-slide-1">
+      <!-- Slide 1: Naivas -->
+      <div class="slide active store-slide-1">
+        <img src="images/naivas-logo.png" alt="Naivas Supermarket" />
         <div class="hero-content store-wordmark-content">
-          <p class="store-wordmark">naivas</p>
-          <p class="store-tagline">We compare their prices in real time, so you always know when they're cheapest.</p>
+          <p class="store-wordmark">Naivas</p>
+          <p class="store-tagline">
+            We compare their prices in real time, so you always know when
+            they're cheapest.
+          </p>
         </div>
       </div>
 
-      <div class="slide store-slide store-slide-2">
+      <!-- Slide 2: Quickmart -->
+      <div class="slide store-slide-2">
+        <img src="images/quickmart-logo.png" alt="Quickmart Supermarket" />
         <div class="hero-content store-wordmark-content">
           <p class="store-wordmark">Quickmart</p>
-          <p class="store-tagline">Every Quickmart deal, checked against the competition automatically.</p>
+          <p class="store-tagline">
+            Every Quickmart deal, checked against the competition automatically.
+          </p>
         </div>
       </div>
 
-      <div class="slide store-slide store-slide-3">
+      <!-- Slide 3: Cleanshelf -->
+      <div class="slide store-slide-3">
+        <img src="images/cleanshelf-logo.png" alt="Cleanshelf Supermarket" />
         <div class="hero-content store-wordmark-content">
-          <p class="store-wordmark">cleanshelf</p>
-          <p class="store-tagline">See exactly when Cleanshelf beats the rest — and by how much.</p>
+          <p class="store-wordmark">Cleanshelf</p>
+          <p class="store-tagline">
+            See exactly when Cleanshelf beats the rest — and by how much.
+          </p>
         </div>
       </div>
     </section>
-    <div class="wave"></div>
 
     <!-- Search Results (populated dynamically by index.js) -->
 
-    <section class="search-results-section" id="search-results-section" style="display: none;">
+    <section
+      class="search-results-section"
+      id="search-results-section"
+      style="display: none"
+    >
       <h2>Search Results</h2>
       <div class="product-grid" id="search-results-grid"></div>
     </section>

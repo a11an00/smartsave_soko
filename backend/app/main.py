@@ -7,7 +7,7 @@ from fastapi import FastAPI, HTTPException, Depends
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.sql import text
-from passlib.context import CryptContext
+import bcrypt  # Native bcrypt import
 import jwt
 
 from database import SessionLocal
@@ -27,11 +27,20 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
-SECRET_KEY = "change-this-to-a-long-random-secret-string"
+SECRET_KEY = "a11anoo"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60
+
+# --- Native Bcrypt Password Helpers ---
+def hash_password(password: str) -> str:
+    pwd_bytes = password.encode('utf-8')
+    salt = bcrypt.gensalt()
+    return bcrypt.hashpw(pwd_bytes, salt).decode('utf-8')
+
+def verify_password(plain_password: str, hashed_password: str) -> bool:
+    pwd_bytes = plain_password.encode('utf-8')
+    hash_bytes = hashed_password.encode('utf-8')
+    return bcrypt.checkpw(pwd_bytes, hash_bytes)
 
 def create_access_token(data: dict):
     to_encode = data.copy()
@@ -95,7 +104,8 @@ async def register_user(payload: UserAuthSchema):
         if existing:
             raise HTTPException(status_code=400, detail="An account with this email already exists.")
 
-        hashed_password = pwd_context.hash(payload.password)
+        # Updated to use native hash helper
+        hashed_password = hash_password(payload.password)
 
         result = db.execute(
             text("INSERT INTO users (email, hashed_password) VALUES (:email, :hashed_password)"),
@@ -122,7 +132,8 @@ async def login_user(payload: UserAuthSchema):
 
         user_id, hashed_password = row[0], row[1]
 
-        if not pwd_context.verify(payload.password, hashed_password):
+        # Updated to use native verify helper
+        if not verify_password(payload.password, hashed_password):
             raise HTTPException(status_code=401, detail="Invalid email or password.")
 
         access_token = create_access_token(data={"sub": str(user_id)})
@@ -133,10 +144,6 @@ async def login_user(payload: UserAuthSchema):
 
 @app.get("/items/popular", tags=["Module 4: Search Engine"])
 async def get_popular_products(limit: int = 8):
-    """
-    Return a random sample of products that have both a real image and
-    at least one recorded price, used to populate the homepage.
-    """
     db = SessionLocal()
     try:
         query = text("""
@@ -171,14 +178,21 @@ CATEGORY_KEYWORDS = {
         "spirit", "beer", "wine", "alcoholic", "juice", "carbonate",
         "soft-drink", "beverage"
     ],
+     "soda-and-drinks": [
+        "soda", "juice", "carbonate",
+        "soft-drink", "beverage"
+    ],
+     "cereals": [
+        "rice", "beans",
+    ],
+     "flour": [
+        "flour","maize","unga",
+    ],
+
 }
 
 @app.get("/items/by-category", tags=["Module 4: Search Engine"])
 async def get_items_by_category(category: str, limit: int = 20):
-    """
-    Return products whose stored category matches any of the keyword
-    group associated with the requested top-level category.
-    """
     keywords = CATEGORY_KEYWORDS.get(category.lower())
     if not keywords:
         raise HTTPException(status_code=400, detail=f"Unknown category '{category}'.")
@@ -213,9 +227,6 @@ async def get_items_by_category(category: str, limit: int = 20):
 
 @app.get("/items/search", tags=["Module 4: Search Engine"])
 async def search_singular_item(q: str):
-    """
-    Search for items using a flexible, case-insensitive partial match.
-    """
     clean_query = q.strip()
 
     if len(clean_query) < 3:
@@ -247,9 +258,6 @@ async def search_singular_item(q: str):
 
 @app.post("/items/batch", tags=["Module 4: Search Engine"])
 async def batch_search_items(payload: BatchSearchRequest):
-    """
-    Retrieve multiple specified items currently stored inside a user's local storage cart.
-    """
     db = SessionLocal()
     try:
         query = text("""
@@ -270,10 +278,6 @@ async def batch_search_items(payload: BatchSearchRequest):
 
 @app.get("/items/{product_id}", tags=["Module 4: Search Engine"])
 async def get_product_details(product_id: int):
-    """
-    Return full details for a single product, including its lowest
-    current price at each supermarket that stocks it.
-    """
     db = SessionLocal()
     try:
         product_row = db.execute(

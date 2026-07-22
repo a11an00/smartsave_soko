@@ -1,36 +1,50 @@
+/*=========================================
+THEME CONFIGURATION (Fresh Produce Palette)
+=========================================*/
 :root {
-  /* Soko Market palette — fresh produce, trust, and value */
-  --bg-main: #FAF7F1; /* Warm ivory background */
-  --bg-card: #ffffff; /* Crisp white for cards & hero banner */
-  --bg-secondary: #EFEAE0; /* Soft warm neutral for category chips */
+  /* Backgrounds */
+  --bg-main: #ebf3ed; /* Very light sage/mint tint */
+  --bg-card: #ffffff; /* Crisp white for cards & containers */
+  --bg-secondary: #f4f7f4; /* Soft neutral surface */
 
-  /* Primary: Deep Market Green */
-  --primary: #1B4332; /* Deep Market Green (Header BG) */
-  --primary-light: #2D5F47; /* Slightly lighter green for links/hover */
-  --primary-dark: #0F2E22; /* Forest Shadow for headers/titles */
+  /* Pastel Category Card Backgrounds */
+  --cat-yellow: #fbeccb;
+  --cat-mint: #d6eadf;
+  --cat-green: #8fc9a3;
+  --cat-blue: #d8e6f3;
 
-  /* Accent: Sokoni Gold */
-  --accent: #D9A441; /* Sokoni Gold (Shop Now, Search, Add to Cart buttons) */
-  --accent-hover: #B8791F; /* Burnt Amber hover state */
-  --text-dark: #1C2B22; /* Charcoal Green for body readability */
-  --text-muted: #6B7B72; /* Sage Grey for descriptions and subtitles */
+  /* Primary Accent: Vibrant Fresh Produce Green */
+  --primary: #2db86b; /* Bright vibrant green */
+  --primary-light: #4cd388; /* Lighter vibrant green for hover */
+  --primary-dark: #1e874b; /* Deep emerald green */
 
-  /* Savings highlight */
-  --success: #4CAF6D; /* Leaf Green for "You saved KES X" banners */
+  /* Typography */
+  --text-dark: #14221a; /* Dark pine charcoal */
+  --text-muted: #64746a; /* Muted sage grey */
 
-  /* Global design styles */
-  --shadow-soft: 0 4px 20px rgba(27, 67, 50, 0.08); /* Green-tinted soft shadow */
-  --shadow-medium: 0 10px 30px rgba(27, 67, 50, 0.12);
-  --radius-lg: 16px;
-  --radius-md: 12px;
+  /* Badges & Highlights */
+  --accent-gold: #fce870;
+  --badge-dark: #14221a;
+
+  /* Global Design Styles */
+  --shadow-soft: 0 4px 20px rgba(20, 34, 26, 0.05);
+  --shadow-medium: 0 10px 30px rgba(20, 34, 26, 0.08);
+
+  --radius-lg: 24px;
+  --radius-md: 14px;
+  --radius-full: 999px;
+
   --transition-smooth: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
+/*=========================================
+PROFILE PAGE STYLES
+=========================================*/
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Segoe UI", Arial, Helvetica, sans-serif;
 }
 
 body {
@@ -50,62 +64,69 @@ body {
 }
 
 .profile-card {
-  width: 400px;
+  width: 420px;
   background: var(--bg-card);
   backdrop-filter: blur(12px);
   border-radius: var(--radius-lg);
   padding: 35px;
   text-align: center;
   box-shadow: var(--shadow-medium);
-  border: 1px solid rgba(0, 29, 74, 0.05); /* Subtle navy card border */
+  border: 1px solid rgba(20, 34, 26, 0.06);
 }
 
 .profile-img {
-  width: 140px;
-  height: 140px;
+  width: 130px;
+  height: 130px;
   border-radius: 50%;
   object-fit: cover;
-  border: 5px solid var(--primary-light); /* Vibrant Blue image border */
-  margin-bottom: 20px;
+  border: 4px solid var(--primary); /* Vibrant green image border */
+  margin: 0 auto 20px;
   display: block;
-  margin: 0 auto;
 }
 
 .profile-card h1 {
-  font-size: 30px;
-  margin-bottom: 8px;
+  font-size: 28px;
+  margin-bottom: 4px;
   color: var(--primary-dark);
+  font-weight: 800;
+  letter-spacing: -0.5px;
 }
 
 .username {
-  color: var(--primary-light); /* Bold blue username */
+  color: var(--primary); /* Vibrant green username */
   font-weight: 600;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
+  font-size: 15px;
 }
 
 .email {
   color: var(--text-muted);
   margin-bottom: 25px;
+  font-size: 14px;
 }
 
 .stats {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   margin: 25px 0;
-  background: var(--bg-secondary); /* Soft background container for stats */
-  padding: 15px;
+  background: var(--bg-secondary);
+  padding: 16px;
   border-radius: var(--radius-md);
 }
 
 .stats div h3 {
-  color: var(--accent); /* Electric Red for key highlight stats */
-  font-size: 24px;
+  color: var(--primary-dark); /* Crisp dark emerald stats numbers */
+  font-size: 22px;
+  font-weight: 800;
 }
 
 .stats div p {
-  font-size: 14px;
-  color: var(--primary-dark);
-  font-weight: 500;
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 2px;
 }
 
 .info {
@@ -117,59 +138,71 @@ body {
 .info h4 {
   text-align: center;
   color: var(--primary-dark);
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  font-size: 18px;
+  font-weight: 700;
 }
 
 .info p {
-  margin: 15px 0;
-  font-size: 16px;
+  margin: 12px 0;
+  font-size: 15px;
+  color: var(--text-muted);
 }
 
 .buttons {
-  display: flex; /* Swapped table-cell to flex for cleaner layout alignment */
+  display: flex;
   flex-direction: column;
-  gap: 15px;
-  margin-top: 10px;
+  gap: 12px;
+  margin-top: 15px;
 }
 
 .buttons button {
   padding: 14px;
   border: none;
-  border-radius: var(--radius-md);
-  background: var(--accent); /* Energizing Red button */
+  border-radius: var(--radius-full); /* Pill CTA styling */
+  background: var(--primary); /* Vibrant green */
   color: #ffffff;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 15px;
   cursor: pointer;
+  box-shadow: 0 4px 15px rgba(45, 184, 107, 0.25);
   transition: var(--transition-smooth);
 }
 
 .buttons button:hover {
-  background: var(--accent-hover); /* Switches to Podium Yellow on hover */
-  color: var(--primary-dark); /* Contrast Navy text on hover */
+  background: var(--primary-dark); /* Dark emerald on hover */
+  color: #ffffff;
   transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(30, 135, 75, 0.35);
 }
 
+/* Secondary Action: Logout Button */
 .buttons .logout {
-  background: var(--primary-light); /* Secondary actions get Blue */
+  background: var(--bg-secondary);
+  color: var(--text-dark);
+  box-shadow: none;
+  border: 1px solid rgba(20, 34, 26, 0.1);
 }
 
 .buttons .logout:hover {
-  background: var(--accent) !important; /* Logout hover snaps to Red */
+  background: #e65c5c; /* Clean danger red state for logout */
   color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 4px 12px rgba(230, 92, 92, 0.3);
 }
 
 .signature {
   text-align: center;
   margin: 40px 0 20px;
-  font-size: 18px;
-  color: var(--primary);
+  font-size: 15px;
+  color: var(--text-muted);
   font-weight: 600;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
 .signature sup {
-  color: var(--accent);
-  font-size: 12px;
+  color: var(--primary);
+  font-size: 11px;
   font-weight: bold;
 }
