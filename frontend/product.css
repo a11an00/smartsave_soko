@@ -1,3 +1,45 @@
+/*=========================================
+THEME CONFIGURATION (Fresh Produce Palette)
+=========================================*/
+:root {
+  /* Backgrounds */
+  --bg-main: #ebf3ed; /* Very light sage/mint tint */
+  --bg-card: #ffffff; /* Crisp white for cards & containers */
+  --bg-secondary: #f4f7f4; /* Soft neutral surface */
+
+  /* Pastel Category Card Backgrounds */
+  --cat-yellow: #fbeccb;
+  --cat-mint: #d6eadf;
+  --cat-green: #8fc9a3;
+  --cat-blue: #d8e6f3;
+
+  /* Primary Accent: Vibrant Fresh Produce Green */
+  --primary: #2db86b; /* Bright vibrant green */
+  --primary-light: #4cd388; /* Lighter vibrant green for hover */
+  --primary-dark: #1e874b; /* Deep emerald green */
+
+  /* Typography */
+  --text-dark: #14221a; /* Dark pine charcoal */
+  --text-muted: #64746a; /* Muted sage grey */
+
+  /* Badges & Highlights */
+  --accent-gold: #fce870;
+  --badge-dark: #14221a;
+
+  /* Global Design Styles */
+  --shadow-soft: 0 4px 20px rgba(20, 34, 26, 0.05);
+  --shadow-medium: 0 10px 30px rgba(20, 34, 26, 0.08);
+
+  --radius-lg: 24px;
+  --radius-md: 14px;
+  --radius-full: 999px;
+
+  --transition-smooth: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/*=========================================
+PRODUCT DETAILS SECTION
+=========================================*/
 .product-details-section {
   padding: 40px 60px;
 }
@@ -7,62 +49,108 @@
   gap: 40px;
   background: var(--bg-card);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-soft);
-  padding: 30px;
+  box-shadow: var(--shadow-medium);
+  border: 1px solid rgba(20, 34, 26, 0.06);
+  padding: 35px;
   flex-wrap: wrap;
+  align-items: flex-start;
 }
 
 .product-details-img {
-  width: 300px;
-  height: 300px;
+  width: 320px;
+  height: 320px;
   object-fit: contain;
   border-radius: var(--radius-lg);
   background: var(--bg-secondary);
+  padding: 20px;
 }
 
 .product-details-info {
   flex: 1;
-  min-width: 250px;
+  min-width: 280px;
 }
 
 .product-details-info h1 {
   color: var(--primary-dark);
   margin-bottom: 8px;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
 }
 
 .product-meta {
   color: var(--text-muted);
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   text-transform: capitalize;
+  font-size: 15px;
+  font-weight: 600;
 }
 
+/*=========================================
+PRICE COMPARISON TABLE
+=========================================*/
 .product-price-table {
   width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 20px;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-bottom: 25px;
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid rgba(20, 34, 26, 0.08);
 }
 
-.product-price-table th, .product-price-table td {
-  border: 1px solid #ddd;
-  padding: 8px 12px;
+.product-price-table th,
+.product-price-table td {
+  padding: 14px 18px;
   text-align: left;
+  border-bottom: 1px solid rgba(20, 34, 26, 0.06);
+  font-size: 15px;
+}
+
+.product-price-table th {
+  background: var(--bg-secondary);
+  color: var(--primary-dark);
+  font-weight: 700;
+}
+
+.product-price-table tr:last-child td {
+  border-bottom: none;
 }
 
 .cheapest-row {
-  background: rgba(76, 175, 109, 0.15);
-  font-weight: bold;
+  background: var(--cat-mint) !important;
+  color: var(--primary-dark);
+  font-weight: 700;
 }
 
+/*=========================================
+ADD TO CART BUTTON (HIGH VISIBILITY FIX)
+=========================================*/
 .add-to-cart-btn {
-  background: var(--accent);
-  color: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--primary); /* Vibrant Fresh Produce Green */
+  color: #ffffff !important; /* Force high-contrast white text */
   border: none;
-  padding: 12px 24px;
-  border-radius: var(--radius-lg);
+  padding: 15px 32px;
+  border-radius: var(--radius-full); /* Pill shape matching rest of app */
   cursor: pointer;
-  font-weight: bold;
+  font-size: 16px;
+  font-weight: 700;
+  box-shadow: 0 4px 15px rgba(45, 184, 107, 0.35); /* High-visibility green glow */
+  transition: var(--transition-smooth);
 }
 
 .add-to-cart-btn:hover {
-  background: var(--accent-hover);
+  background: var(--primary-dark); /* Deep emerald green on hover */
+  color: #ffffff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(30, 135, 75, 0.45);
+}
+
+.add-to-cart-btn:active {
+  transform: translateY(0);
 }

@@ -50,10 +50,10 @@ document.addEventListener("DOMContentLoaded", () => {
         sessionStorage.setItem("soko_user_id", data.user_id);
       }
 
-      alert("Successfully logged in! Redirecting to dashboard...");
+      
 
-      // Redirect to your main application interface
-      window.location.href = "index.html";
+      // Redirect to your main profile page
+      window.location.href = "profile.html";
     } catch (error) {
       alert(`Login Error: ${error.message}`);
     } finally {

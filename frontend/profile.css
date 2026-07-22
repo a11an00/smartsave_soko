@@ -38,7 +38,7 @@ THEME CONFIGURATION (Fresh Produce Palette)
 }
 
 /*=========================================
-PROFILE PAGE STYLES
+GLOBAL RESET & BODY
 =========================================*/
 * {
   margin: 0;
@@ -51,10 +51,60 @@ body {
   background: var(--bg-main);
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
+  color: var(--text-dark);
+}
+
+/*=========================================
+NAVBAR STYLES
+=========================================*/
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 60px;
+  background: var(--bg-card);
+  box-shadow: var(--shadow-soft);
+  width: 100%;
+  position: relative;
+  z-index: 10;
+}
+
+.logo h2 {
+  color: var(--primary);
+  margin: 0;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 40px;
+  margin: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-dark);
+  font-weight: bold;
+  transition: var(--transition-smooth);
+}
+
+.nav-links a:hover {
+  color: var(--primary);
+}
+
+/*=========================================
+PROFILE PAGE STYLES
+=========================================*/
+.profile-container-wrapper {
+  flex: 1;
+  display: flex;
   justify-content: center;
   align-items: center;
-  padding: 40px;
-  color: var(--text-dark);
+  padding: 40px 20px;
+  width: 100%;
 }
 
 .profile-container {
